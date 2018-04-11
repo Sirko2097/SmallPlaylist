@@ -3,10 +3,16 @@ package view;
 
 import controller.MenuController;
 
+import java.io.IOException;
+
 public class View {
 
     public void init(){
-        new MenuController().printMenu();
+        try {
+            new MenuController().printMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void printElement(String message) {
