@@ -5,6 +5,7 @@ import service.MainMenu;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ResourceBundle;
 
 public class MenuController {
     public void printMenu() {
@@ -50,5 +51,13 @@ public class MenuController {
 
 
         }
+    }
+    private ResourceBundle chooseLanguage() {
+        char key;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Choose Language:");
+        System.out.println("1) English;");
+        System.out.println("2) Українська;");
+        System.out.println("Input key> ");
     }
 }
