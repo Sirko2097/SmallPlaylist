@@ -4,6 +4,7 @@ import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOTrackImpl;
 import model.Track;
 import model.TrackComparator;
+import org.apache.log4j.Logger;
 import view.View;
 
 import java.io.BufferedReader;
@@ -21,14 +22,16 @@ class MainController {
     private Connection connection;
     private List<Track> trackList;
 
+    private final static Logger logger = Logger.getLogger(MainController.class);
     //initialization block
     {
         reader = new BufferedReader(new InputStreamReader(System.in));
         daoFactory = new DAOFactoryImpl();
         try {
             connection = daoFactory.getConnection();
+            logger.info("Connection was established");
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
