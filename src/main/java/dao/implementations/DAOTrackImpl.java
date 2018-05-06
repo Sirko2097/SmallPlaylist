@@ -18,7 +18,7 @@ import java.util.List;
 public class DAOTrackImpl implements DAOTrack {
     private final Connection connection;
 
-    private static final Logger logger = Logger.getLogger(DAOFactoryImpl.class);
+    //private static final Logger logger = Logger.getLogger(DAOFactoryImpl.class);
 
     public DAOTrackImpl(Connection connection) {
         this.connection = connection;
@@ -34,7 +34,7 @@ public class DAOTrackImpl implements DAOTrack {
     public Track read(int key) throws SQLException {
         PreparedStatement prStat = connection.prepareStatement("SELECT performer, name, duration, genre FROM musicLib.tracks WHERE id = ?");
         prStat.setInt(1, key);
-        logger.info("Read key.");
+       // logger.info("Read key.");
         ResultSet resultSet = prStat.executeQuery();
         resultSet.next();
         return new Track(resultSet.getString("performer"), resultSet.getString("name"),
@@ -50,7 +50,7 @@ public class DAOTrackImpl implements DAOTrack {
     public List<Track> getAll() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT performer, name, duration, genre FROM tracks");
         ResultSet resultSet = preparedStatement.executeQuery();
-        logger.info("Result set of all records in DB has been received.");
+        //logger.info("Result set of all records in DB has been received.");
 
         List<Track> tracks = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class DAOTrackImpl implements DAOTrack {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT performer, name, duration, genre\n" +
                 "FROM musicLib.tracks WHERE tracks.performer = '" + performerName + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
-        logger.info("Record from DB, finding by performer was received.");
+        //logger.info("Record from DB, finding by performer was received.");
 
         if (resultSet.next()) {
             return new Track(resultSet.getString("performer"), resultSet.getString("name"),
@@ -95,7 +95,7 @@ public class DAOTrackImpl implements DAOTrack {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT performer, name, duration, genre\n" +
                 "FROM musicLib.tracks WHERE tracks.name = '" + nameStr + "'");
         ResultSet resultSet = preparedStatement.executeQuery();
-        logger.info("Record was received, finding by name, was received.");
+        //logger.info("Record was received, finding by name, was received.");
 
         if (resultSet.next()) {
             return new Track(resultSet.getString("performer"), resultSet.getString("name"),
@@ -116,7 +116,7 @@ public class DAOTrackImpl implements DAOTrack {
                 "FROM musicLib.tracks WHERE (duration) IN \n" +
                 "                           (SELECT max(duration) FROM musicLib.tracks)");
         ResultSet resultSet = preparedStatement.executeQuery();
-        logger.info("Record with info about the longest song was received.");
+        //logger.info("Record with info about the longest song was received.");
 
         if (resultSet.next()) {
             return new Track(resultSet.getString("performer"), resultSet.getString("name"),

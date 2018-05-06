@@ -13,6 +13,12 @@ public class DAOFactoryImpl implements DAOFactory {
     private String url = "jdbc:mysql://localhost:3306/musicLib";
     private String driver = "com.mysql.jdbc.Driver";
 
+    private static DAOFactoryImpl instance = new DAOFactoryImpl();
+
+    public static DAOFactoryImpl getInstance() {
+        return instance;
+    }
+
     @Override
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
@@ -23,7 +29,7 @@ public class DAOFactoryImpl implements DAOFactory {
         return new DAOTrackImpl(connection);
     }
 
-    public DAOFactoryImpl() {
+    private DAOFactoryImpl() {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {

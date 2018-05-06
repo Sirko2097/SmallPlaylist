@@ -2,6 +2,7 @@ package controller;
 
 import dao.implementations.DAOFactoryImpl;
 import dao.implementations.DAOTrackImpl;
+import dao.interfaces.DAOFactory;
 import model.Track;
 import model.TrackComparator;
 import org.apache.log4j.Logger;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-class MainController {
+public class MainController {
     private View view = new View();
     private BufferedReader reader;
     private DAOFactoryImpl daoFactory;
@@ -26,7 +27,7 @@ class MainController {
     //initialization block
     {
         reader = new BufferedReader(new InputStreamReader(System.in));
-        daoFactory = new DAOFactoryImpl();
+        daoFactory = DAOFactoryImpl.getInstance();
         try {
             connection = daoFactory.getConnection();
             logger.info("Connection was established");
